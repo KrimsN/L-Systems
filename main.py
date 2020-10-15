@@ -17,11 +17,7 @@ class Drawer:
     def __init__(self, draw_rules: Dict[str, str], _turtle: Turtle = Turtle()) -> None:
         self.t = _turtle
 
-        self.draw_rules = {
-            'F': 'forward(10)',
-            '+': 'left(90)',
-            '-': 'right(90)'
-        }
+        self.draw_rules = draw_rules
 
         self.t.speed(10)
         self.t.up()
