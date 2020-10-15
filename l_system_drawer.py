@@ -4,11 +4,11 @@ from turtle import Turtle
 from typing import Dict
 
 
-class Drawer:
+class LSDrawer:
 
 
-    def __init__(self, draw_rules: Dict[str, str], _turtle: Turtle = Turtle(), start_pos = (-100, -100), speed = 10) -> None:
-        self.t = _turtle
+    def __init__(self, draw_rules: Dict[str, str], _turtle: Turtle = None, start_pos = (-100, -100), speed = 10) -> None:
+        self.t = Turtle() if not _turtle else _turtle
 
         self.draw_rules = draw_rules
 
@@ -17,6 +17,7 @@ class Drawer:
         self.t.setposition(start_pos)
         self.t.down()
         self.t.resizemode('auto')
+        self.t._tracer(0)
 
         
     
@@ -43,6 +44,7 @@ class Drawer:
 
             else:
                 pass
+        self.t._update()
 
 
     @staticmethod
@@ -51,7 +53,10 @@ class Drawer:
         for i in range(n):
             rez = ''
             for c in ls:
-                rez += ls_rules[c]
+                if c not in ls_rules:
+                    rez += c
+                else:
+                    rez += ls_rules[c]
             ls = rez
         return rez
 

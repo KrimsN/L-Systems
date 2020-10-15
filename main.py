@@ -1,36 +1,37 @@
-from l_system_drawer import Drawer
-import turtle
-
+from l_system_drawer import LSDrawer
+from turtle import Turtle, Screen
+from time import sleep
 def main():
 
+    cursor = Turtle()
+
     # ls_rules = {
-    #     'X': 'X+YF+',
-    #     'Y': '-FX-Y',
-    #     'F': 'F',
     #     '+': '+',
     #     '-': '-',
+    #     '[': '[',
+    #     ']': ']',
+    #     'X': 'F-[[X]+X]+F[+FX]-X',
+    #     'F': 'FF'
     # }
-
     ls_rules = {
-        '+': '+',
-        '-': '-',
-        '[': '[',
-        ']': ']',
-        'X': 'F-[[X]+X]+F[+FX]-X',
-        'F': 'FF'
+        'F': '',
+        'L': 'FL-FR--FR+FL++FLFL+FR-',
+        'R': '+FL-FRFR--FR-FL++FL+FR',
     }
-    ls = Drawer.create_L_system('X', 6, ls_rules)
+    ls = LSDrawer.create_L_system('FL', 4, ls_rules)
 
     draw_rules = {
-        'F': 'fd(10)',
-        '-': 'left(25)',
-        '+': 'right(25)',
+        'F': 'fd(2)',
+        '-': 'left(60)',
+        '+': 'right(60)',
     }
             
-    d = Drawer(draw_rules, start_pos=(-500,-200))
+    d = LSDrawer(draw_rules, start_pos=(0, -200), _turtle=cursor)
     
     d.draw(ls)
-    turtle.mainloop()
+
+    screen = Screen()
+    screen.exitonclick()
 
 
 if __name__ == "__main__":
